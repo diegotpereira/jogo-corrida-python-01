@@ -1,5 +1,5 @@
 
 
-import telaJogo
+import jogar
 
-telaJogo.jogar()
+jogar.jogar()
