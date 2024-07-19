@@ -64,10 +64,10 @@ def jogar():
     # Carrega a imagem do carro NPC usando a função npc_aleatorio
     carro = pygame.image.load(telaJogo.npc_aleatorio())
     carro_pc1 = pygame.image.load(telaJogo.npc_aleatorio())
-    # carro_pc2 = pygame.image.load(npc_aleatorio())
-    # carro_pc3 = pygame.image.load(npc_aleatorio())
-    # carro_pc4 = pygame.image.load(npc_aleatorio())
-    # carro_pc5 = pygame.image.load(npc_aleatorio())
+    carro_pc2 = pygame.image.load(telaJogo.npc_aleatorio())
+    carro_pc3 = pygame.image.load(telaJogo.npc_aleatorio())
+    carro_pc4 = pygame.image.load(telaJogo.npc_aleatorio())
+    carro_pc5 = pygame.image.load(telaJogo.npc_aleatorio())
 
     cmd = pygame.image.load('C:/Users/Suporte/Documents/Repositorio/jogo-corrida-python-01/test/image/cmd.png')
 
@@ -116,25 +116,118 @@ def jogar():
 
             xp -= veloc_xp
         
+
         # Movimentação dos carros NPC
+
+        # Atualiza a posição vertical do carro NPC 1
         y1 += veloc_x1
+
+        # Verifica se o carro NPC 1 saiu da tela (posição y maior que 680)
         if y1 > 680:
 
+            # Se o carro NPC 1 saiu da tela, reposiciona-o em uma nova posição aleatória 
+            # acima da tela
             y1 = randint(-5000, -500)
 
+            # Carrega uma nova imagem aleatória para o carro NPC 1
+            carro_pc1 = pygame.image.load(telaJogo.npc_aleatorio())
+
+            # Ajusta a velocidade do carro NPC 1 dependendo do tempo decorrido no jogo
             if tempo_segundo >= 1:
 
+                # Se o tempo decorrido é de pelo menos 1 segundo, aumenta a velocidade 
+                # do NPC proporcionalmente ao tempo
                 veloc_x1 = telaJogo.velocidade_npc() * 10 * (1 + tempo_segundo/10)
 
             else:
 
-                veloc_x1 = velocidade_npc() * 10
+                # Se o tempo decorrido é menos de 1 segundo, usa a velocidade base do NPC
+                veloc_x1 = telaJogo.velocidade_npc() * 10
 
-
+        # Atualiza a posição vertical do carro NPC 2
         y2 += veloc_x2
+
+        # Verifica se o carro NPC 2 saiu da tela (posição y maior que 680)
+        if y2 > 680:
+
+            # Se o carro NPC 2 saiu da tela, 
+            # reposiciona-o em uma nova posição aleatória acima da tela
+            y2 = randint(-5000, -500)
+
+            # Carrega uma nova imagem aleatória para o carro NPC 2
+            carro_pc2 = pygame.image.load(telaJogo.npc_aleatorio())
+
+            # Ajusta a velocidade do carro NPC 2 dependendo do tempo decorrido no jogo
+            if tempo_segundo >= 1:
+
+                # Se o tempo decorrido é de pelo menos 1 segundo, aumenta a velocidade 
+                # do NPC proporcionalmente ao tempo
+                veloc_x2 = telaJogo.velocidade_npc() * 10 (1 + tempo_segundo/10)
+
+            else:
+                
+                # Se o tempo decorrido é menos de 1 segundo, usa a velocidade base do NPC
+                veloc_x2 = telaJogo.velocidade_npc() * 10
+
+
+
+        # Atualiza a posição vertical do carro NPC 3
         y3 += veloc_x3
+
+        # Verifica se o carro NPC 3 saiu da tela (posição y maior que 680)
+        if y3 > 680:
+ 
+            # Se o carro NPC 3 saiu da tela, 
+            # reposiciona-o em uma nova posição aleatória acima da tela
+            y3 = randint(-5000, -500)
+
+            # Carrega uma nova imagem aleatória para o carro NPC 3
+            carro_pc3 = pygame.image.load(telaJogo.npc_aleatorio())
+
+            # Ajusta a velocidade do carro NPC 3 dependendo do tempo decorrido no jogo
+            if tempo_segundo >= 1:
+
+                # Se o tempo decorrido é de pelo menos 1 segundo, aumenta a velocidade 
+                # do NPC proporcionalmente ao tempo
+                veloc_x3 = telaJogo.velocidade_npc() * 10 * (1 + tempo_segundo/10)
+
+            # Se o tempo decorrido é menos de 1 segundo, usa a velocidade base do NPC
+            else:
+
+                # Se o tempo decorrido é menos de 1 segundo, usa a velocidade base do NPC
+                veloc_x3 = telaJogo.velocidade_npc() * 10
+
+        # Atualiza a posição vertical do carro NPC 4
         y4 += veloc_x4
+
+        # Verifica se o carro NPC 4 saiu da tela (posição y maior que 680)
+        if y4 > 680:
+
+            # Se o carro NPC 4 saiu da tela, 
+            # reposiciona-o em uma nova posição aleatória acima da tela
+            y4 = randint(-5000, -500)
+
+            # Carrega uma nova imagem aleatória para o carro NPC 3
+            carro_pc4 = pygame.image.load(telaJogo.npc_aleatorio())
+
+            # Ajusta a velocidade do carro NPC 4 dependendo do tempo decorrido no jogo
+            if tempo_segundo >= 1:
+
+                # Se o tempo decorrido é de pelo menos 1 segundo, aumenta a velocidade 
+                # do NPC proporcionalmente ao tempo
+                veloc_x4 = telaJogo.velocidade_npc() * 10 * (1 + tempo_segundo/10)
+
+            else:
+
+                # Se o tempo decorrido é menos de 1 segundo, usa a velocidade base do NPC
+                veloc_x4 + telaJogo.velocidade_npc() * 10
+
+        # Atualiza a posição vertical do carro NPC 5
         y5 += veloc_x5
+
+        
+
+            
 
         # Movimentação da pista
         ypista += veloc_pista
@@ -175,10 +268,10 @@ def jogar():
         # Desenha o carro na tela na posição especificada
         janela.blit(carro, (xp, yp))
         janela.blit(carro_pc1, (int(x1), int(y1)))
-        # janela.blit(carro_pc2, (int(x2), int(y2)))
-        # janela.blit(carro_pc3, (int(x3), int(y3)))
-        # janela.blit(carro_pc4, (int(x4), int(y4)))
-        # janela.blit(carro_pc5, (int(x5), int(y5)))
+        janela.blit(carro_pc2, (int(x2), int(y2)))
+        janela.blit(carro_pc3, (int(x3), int(y3)))
+        janela.blit(carro_pc4, (int(x4), int(y4)))
+        janela.blit(carro_pc5, (int(x5), int(y5)))
 
 
 
