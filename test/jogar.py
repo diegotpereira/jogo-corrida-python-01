@@ -83,7 +83,7 @@ def jogar():
     # Loop principal do jogo, que continua enquanto a janela estiver aberta
     while janela_aberta:
 
-        # pygame.time.delay(50)
+        pygame.time.delay(50)
 
         # captura eventos do jogo
         for event in pygame.event.get():
@@ -116,19 +116,19 @@ def jogar():
 
             xp -= veloc_xp
         
-        # # Movimentação dos carros NPC
-        # y1 += veloc_x1
-        # if y1 > 680:
+        # Movimentação dos carros NPC
+        y1 += veloc_x1
+        if y1 > 680:
 
-        #     y1 = randint(-5000, -500)
+            y1 = randint(-5000, -500)
 
-        #     if tempo_segundo >= 1:
+            if tempo_segundo >= 1:
 
-        #         veloc_x1 = velocidade_npc() * 10 * (1 + tempo_segundo/10)
+                veloc_x1 = telaJogo.velocidade_npc() * 10 * (1 + tempo_segundo/10)
 
-        #     else:
+            else:
 
-        #         veloc_x1 = velocidade_npc() * 10
+                veloc_x1 = velocidade_npc() * 10
 
 
         y2 += veloc_x2
