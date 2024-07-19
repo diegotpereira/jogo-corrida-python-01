@@ -39,10 +39,17 @@ def jogar():
     x5 = 775
     y5 = randint(-2000, -500)
 
+    # variáveis de tempo e placar
+    timer = 0
+    tempo_segundo = 0
+
 
     # Define a posição inicial da pista
     xpista = 0
     ypista = -720
+
+    xcmd = 5
+    ycmd = 100
 
     # Define um contador para o fundo
     contFundo = 1
@@ -50,16 +57,29 @@ def jogar():
     # Tempo de fundo (não está sendo utilizado atualmente)
     tempo_fundo = 0
 
+    # variáveis de velocidade de deslocamento do objeto (círculo)
+
+    # valor em pixels - velocidade do carro do jogador
+    veloc_xp = 20
+
+    # velocidade dos carros npc
+    veloc_x1 = veloc_x2 = veloc_x3 = veloc_x4 = veloc_x5 = 20
+
+    # valor em pixels - velocidade da pista
+    veloc_pista = 30
+
     # Carrega a imagem de fundo usando a função escolheFundo
     fundo = pygame.image.load(escolheFundo(contFundo))
 
     # Carrega a imagem do carro NPC usando a função npc_aleatorio
     carro = pygame.image.load(npc_aleatorio())
     carro_pc1 = pygame.image.load(npc_aleatorio())
-    carro_pc2 = pygame.image.load(npc_aleatorio())
-    carro_pc3 = pygame.image.load(npc_aleatorio())
-    carro_pc4 = pygame.image.load(npc_aleatorio())
-    carro_pc5 = pygame.image.load(npc_aleatorio())
+    # carro_pc2 = pygame.image.load(npc_aleatorio())
+    # carro_pc3 = pygame.image.load(npc_aleatorio())
+    # carro_pc4 = pygame.image.load(npc_aleatorio())
+    # carro_pc5 = pygame.image.load(npc_aleatorio())
+
+    cmd = pygame.image.load('C:/Users/Suporte/Documents/Repositorio/jogo-corrida-python-01/test/image/cmd.png')
 
     # Cria a janela do jogo
     janela = cria_tela()
@@ -75,29 +95,102 @@ def jogar():
 
         # pygame.time.delay(50)
 
-        # for event in pygame.event.get():
+        # captura eventos do jogo
+        for event in pygame.event.get():
 
-        #     if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT:
 
-        #         janela_aberta = False
+                janela_aberta = False
 
-     
-        # if tempo_fundo > 16:
 
-        #     tempo_fundo = 0
+        # comandos para movimentação do objeto
+        comandos = pygame.key.get_pressed()
 
-        #     fundo = pygame.image.load(escolheFundo(contFundo))
+        # comando movimentar para frente
+        if(comandos[pygame.K_UP] or comandos[pygame.K_w]) and yp > 0: 
+
+            yp -= veloc_xp
+
+        # comando movimentar para trás
+        if(comandos[pygame.K_DOWN] or comandos[pygame.K_s]) and yp < 600:
+
+            yp += veloc_xp
+
+        # comando movimentar para a direita
+        if(comandos[pygame.K_RIGHT] or comandos[pygame.K_d]) and xp < 750:
+
+            xp += veloc_xp
+
+        # comando movimentar para a esquerda
+        if(comandos[pygame.K_LEFT] or comandos[pygame.K_a]) and xp > 210:
+
+            xp -= veloc_xp
+        
+        # # Movimentação dos carros NPC
+        # y1 += veloc_x1
+        # if y1 > 680:
+
+        #     y1 = randint(-5000, -500)
+
+        #     if tempo_segundo >= 1:
+
+        #         veloc_x1 = velocidade_npc() * 10 * (1 + tempo_segundo/10)
+
+        #     else:
+
+        #         veloc_x1 = velocidade_npc() * 10
+
+
+        y2 += veloc_x2
+        y3 += veloc_x3
+        y4 += veloc_x4
+        y5 += veloc_x5
+
+        # Movimentação da pista
+        ypista += veloc_pista
+        if ypista >= 0:
+
+            ypista = -720
+
+        # # Atualização do placar e velocidade
+        # if timer < 20:
+
+        #     timer += 1
+
+        # else:
+
+        #     if veloc_pista < 100:
+
+        #         veloc_pista = veloc_pista * (1 + tempo_segundo/500)
+    
+
+        # Troca de fundo da pista
+        if tempo_fundo > 16:
+
+            tempo_fundo = 0
+
+            contFundo += 1
+
+            if contFundo > 3:
+
+                contFundo = 1
+
+            fundo = pygame.image.load(escolheFundo(contFundo))
 
         # Desenha o fundo na tela na posição especificada
         janela.blit(fundo, (int(xpista), int(ypista)))
 
+        janela.blit(cmd, (xcmd, ycmd))
+
         # Desenha o carro na tela na posição especificada
         janela.blit(carro, (xp, yp))
         janela.blit(carro_pc1, (int(x1), int(y1)))
-        janela.blit(carro_pc2, (int(x2), int(y2)))
-        janela.blit(carro_pc3, (int(x3), int(y3)))
-        janela.blit(carro_pc4, (int(x4), int(y4)))
-        janela.blit(carro_pc5, (int(x5), int(y5)))
+        # janela.blit(carro_pc2, (int(x2), int(y2)))
+        # janela.blit(carro_pc3, (int(x3), int(y3)))
+        # janela.blit(carro_pc4, (int(x4), int(y4)))
+        # janela.blit(carro_pc5, (int(x5), int(y5)))
+
+
 
         # Atualiza a tela com as mudanças feitas
         pygame.display.update()
@@ -138,3 +231,16 @@ def npc_aleatorio():
 
     # Retorna o caminho da imagem do carro NPC correspondente ao número aleatório
     return carro_npc[carro]
+
+
+# Função para determinar a velocidade do NPC
+def velocidade_npc():
+
+    # Gera um número aleatório entre 8 e 12 (inclusive) e o atribui à variável v1
+    v1 = (randint(8, 12))
+
+    # Divide o valor de v1 por 10 para obter a velocidade final e a atribui à variável vFinal
+    vFinal = v1/10
+
+    # Retorna a velocidade final calculada
+    return vFinal
