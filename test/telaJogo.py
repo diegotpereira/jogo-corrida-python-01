@@ -64,6 +64,9 @@ def jogar():
     # Cria a janela do jogo
     janela = cria_tela()
 
+    #mostra nome do jogo na janela
+    pygame.display.set_caption('Corrida em PYTHON -> Jogar')
+
     # Variável para controlar se a janela do jogo está aberta
     janela_aberta = True
 
