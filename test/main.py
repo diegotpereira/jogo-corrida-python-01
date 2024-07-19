@@ -1,0 +1,5 @@
+
+
+import telaJogo
+
+telaJogo.jogar()
