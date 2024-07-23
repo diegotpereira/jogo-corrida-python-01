@@ -3,6 +3,8 @@
 import pygame
 from random import randint
 import telaJogo
+import os
+
 
 # Função principal para executar o jogo
 def jogar():
@@ -69,7 +71,9 @@ def jogar():
     carro_pc4 = pygame.image.load(telaJogo.npc_aleatorio())
     carro_pc5 = pygame.image.load(telaJogo.npc_aleatorio())
 
-    cmd = pygame.image.load('C:/Users/Suporte/Documents/Repositorio/jogo-corrida-python-01/test/image/cmd.png')
+    caminho_base = os.path.dirname(__file__)
+
+    cmd = pygame.image.load(os.path.join(caminho_base, 'image', 'cmd.png'))
 
     # Cria a janela do jogo
     janela = telaJogo.cria_tela()
@@ -115,7 +119,6 @@ def jogar():
         if(comandos[pygame.K_LEFT] or comandos[pygame.K_a]) and xp > 210:
 
             xp -= veloc_xp
-        
 
         # Movimentação dos carros NPC
 
